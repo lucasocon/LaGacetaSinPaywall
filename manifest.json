@@ -1,0 +1,17 @@
+{
+  "manifest_version": 2,
+  "name": "LaGacetaSinPaywall",
+  "version": "0.1",
+  "description": "An extension to avoid paywall in LaGaceta website",
+  "author": "Lucas Ocon",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": ["js/background.js"]
+  }
+}
