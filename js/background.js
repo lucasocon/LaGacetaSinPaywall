@@ -1,8 +1,18 @@
 function blockRequest(details) {
-  console.log("Blocked: ", details.url);
   return {
     cancel: true
   };
+}
+
+function blockLoadForWall(details) {
+  var loadForWallUrl = 'https://www.lagaceta.com.ar/usuarios/load_for_wall/';
+  var mockedUrl = 'https://run.mocky.io/v3/7fb18513-d553-480c-84cc-f279532d452e';
+
+  if( details.url.includes(loadForWallUrl)) {
+    return {
+      redirectUrl: mockedUrl
+    };
+  }
 }
 
 function startBlocking() {
@@ -10,11 +20,16 @@ function startBlocking() {
     chrome.webRequest.onBeforeRequest.removeListener(blockRequest);
   }
 
-  var urls = ['https://libs.lavoz.com.ar/paywall/latest/pw.js'];
+  var paywallUrls = ['https://libs.lavoz.com.ar/paywall/latest/pw.js'];
+  var loadForWallUrls = ['*://www.lagaceta.com.ar/usuarios/load_for_wall/*'];
 
-  try{
+  try {
     chrome.webRequest.onBeforeRequest.addListener(blockRequest, {
-      urls: urls
+      urls: paywallUrls
+    }, ['blocking']);
+
+    chrome.webRequest.onBeforeRequest.addListener(blockLoadForWall, {
+      urls: loadForWallUrls
     }, ['blocking']);
   } catch (e) {
     console.error(e);
