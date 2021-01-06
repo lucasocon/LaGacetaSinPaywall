@@ -5,10 +5,10 @@ function blockRequest(details) {
 }
 
 function blockLoadForWall(details) {
-  var loadForWallUrl = 'https://www.lagaceta.com.ar/usuarios/load_for_wall/';
+  var loadForWallUrl = 'https://www.lagaceta.com.ar/usuarios/load_form_loginwall/';
   var mockedUrl = 'https://run.mocky.io/v3/7fb18513-d553-480c-84cc-f279532d452e';
 
-  if( details.url.includes(loadForWallUrl)) {
+  if(details.url.includes(loadForWallUrl)) {
     return {
       redirectUrl: mockedUrl
     };
@@ -21,7 +21,7 @@ function startBlocking() {
   }
 
   var paywallUrls = ['https://libs.lavoz.com.ar/paywall/latest/pw.js'];
-  var loadForWallUrls = ['*://www.lagaceta.com.ar/usuarios/load_for_wall/*'];
+  var loadForWallUrls = ['*://www.lagaceta.com.ar/usuarios/load_form_loginwall/*'];
 
   try {
     chrome.webRequest.onBeforeRequest.addListener(blockRequest, {
